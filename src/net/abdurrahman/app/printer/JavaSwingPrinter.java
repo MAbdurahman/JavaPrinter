@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
 public class JavaSwingPrinter  extends JFrame {
@@ -24,14 +25,18 @@ public class JavaSwingPrinter  extends JFrame {
         setVisible(true);
     }//end of JavaSwingPrinter Default Constructor
 
+    /**
+     * initComponents Method - contains code to create menu items and menus and
+     * attaching JMenuBar to the JFrame
+     */
     protected void initComponents() {
         setSize(300, 300);
-        centerComponents();
+        centerFrame();
 
         //Add the menu bar
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File", true);
-        fileMenu.setMnemonic('F');
+        fileMenu.setMnemonic(KeyEvent.VK_F);
         fileMenu.add(new FilePrintAction()).setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_P, Event.CTRL_MASK));
         fileMenu.add(new FilePageSetupAction()).setAccelerator(
@@ -57,14 +62,21 @@ public class JavaSwingPrinter  extends JFrame {
 
     }//end of initComponents Method
 
-    protected void centerComponents() {
+    /**
+     * centerFrame Method - centers the frame within the window
+     */
+    protected void centerFrame() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = getSize();
         int x = (screenSize.width - frameSize.width) / 2;
         int y = (screenSize.height - frameSize.height) / 2;
         setLocation(x, y);
-    }
 
+    }//end of centerFrame Method
+
+    /**
+     * FilePrintAction Class -
+     */
     class FilePrintAction extends AbstractAction {
         public FilePrintAction() {
             super("Print");
@@ -76,6 +88,18 @@ public class JavaSwingPrinter  extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent ae) {
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            ComponentPrintable componentPrintable = new ComponentPrintable(getContentPane());
+            printerJob.setPrintable(componentPrintable, pageFormat);
+
+            if (printerJob.printDialog()) {
+                try {
+                    printerJob.print();
+
+                } catch (PrinterException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
         }//end of actionPerformed Method
     }//end of FilePrintAction Class
@@ -103,6 +127,9 @@ public class JavaSwingPrinter  extends JFrame {
         }//end of actionPerformed Method
     }//end of FilePageSetupAction Class
 
+    /**
+     * FileQuitAction Class -
+     */
     class FileQuitAction extends AbstractAction {
         /**
          * Default FileQuitAction Constructor -
@@ -122,9 +149,10 @@ public class JavaSwingPrinter  extends JFrame {
         }//end of actionPerformed Method
     }//end of FileQuitAction Class
 
-
-
-
+    /**
+     * main Method - contains the command line arguments
+     * @param args - String[] representing the command line arguments
+     */
     public static void main(String[] args) {
         /** Get the Look and Feel of the system */
         try {
