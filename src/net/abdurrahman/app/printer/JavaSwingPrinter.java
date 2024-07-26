@@ -2,13 +2,11 @@ package net.abdurrahman.app.printer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.Objects;
 
 public class JavaSwingPrinter  extends JFrame {
     //Instance variables
@@ -30,23 +28,29 @@ public class JavaSwingPrinter  extends JFrame {
      * attaching JMenuBar to the JFrame
      */
     protected void initComponents() {
-        setSize(300, 300);
+        setSize(500, 300);
+
         centerFrame();
+
+        /** ImageIcons for JMenu and JMenuItems */
+        ImageIcon printIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/print.png")));
+        ImageIcon pageSetupIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/pageSetup.png")));
+        ImageIcon quitIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/quit.png")));
+
 
         //Add the menu bar
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File", true);
         fileMenu.setMnemonic(KeyEvent.VK_F);
-        fileMenu.add(new FilePrintAction()).setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_P, Event.CTRL_MASK));
-        fileMenu.add(new FilePageSetupAction()).setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_P, Event.CTRL_MASK | KeyEvent.SHIFT_MASK));
+        fileMenu.add(new FilePrintAction(printIcon)).setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
+        fileMenu.add(new FilePageSetupAction(pageSetupIcon)).setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
         fileMenu.addSeparator();
-        fileMenu.add(new FileQuitAction()).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Event.CTRL_MASK));
+        fileMenu.add(new FileQuitAction(quitIcon)).setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
-
-
 
         //Exit the application when window closed
         addWindowListener(new WindowAdapter() {
@@ -59,7 +63,6 @@ public class JavaSwingPrinter  extends JFrame {
 
            } //end of windowClosing Method
         });//end of Anonymous WindowAdapter Class
-
     }//end of initComponents Method
 
     /**
@@ -78,8 +81,8 @@ public class JavaSwingPrinter  extends JFrame {
      * FilePrintAction Class -
      */
     class FilePrintAction extends AbstractAction {
-        public FilePrintAction() {
-            super("Print");
+        public FilePrintAction(ImageIcon icon) {
+            super("Print", icon);
         }
 
         /**
@@ -95,9 +98,12 @@ public class JavaSwingPrinter  extends JFrame {
             if (printerJob.printDialog()) {
                 try {
                     printerJob.print();
+                    String message = "Printing will start within 10 seconds...";
+                    JOptionPane.showMessageDialog(null, message, "Printing", JOptionPane.PLAIN_MESSAGE);
 
                 } catch (PrinterException ex) {
-                    ex.printStackTrace();
+                    String message = ex.getMessage() + "\n" + ex.getStackTrace();
+                    JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -111,8 +117,8 @@ public class JavaSwingPrinter  extends JFrame {
         /**
          * Default FilePageSetupAction Constructor -
          */
-        public FilePageSetupAction() {
-            super("Page Setup...");
+        public FilePageSetupAction(ImageIcon icon) {
+            super("Page Setup ...", icon);
 
         }//end of Default FilePageSetupAction Constructor
 
@@ -134,8 +140,8 @@ public class JavaSwingPrinter  extends JFrame {
         /**
          * Default FileQuitAction Constructor -
          */
-        public FileQuitAction() {
-            super("Quit");
+        public FileQuitAction(ImageIcon icon) {
+            super("Exit", icon);
 
         }//end of Default FileQuitAction Constructor
 
