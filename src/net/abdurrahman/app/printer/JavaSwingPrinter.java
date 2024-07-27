@@ -21,6 +21,7 @@ public class JavaSwingPrinter  extends JFrame {
         PrinterJob printerJob = PrinterJob.getPrinterJob();
         pageFormat = printerJob.defaultPage();
         setVisible(true);
+
     }//end of JavaSwingPrinter Default Constructor
 
     /**
@@ -98,8 +99,7 @@ public class JavaSwingPrinter  extends JFrame {
             if (printerJob.printDialog()) {
                 try {
                     printerJob.print();
-                    String message = "Printing will start within 10 seconds...";
-                    JOptionPane.showMessageDialog(null, message, "Printing", JOptionPane.PLAIN_MESSAGE);
+                    getPrintingDialog();
 
                 } catch (PrinterException ex) {
                     String message = ex.getMessage() + "\n" + ex.getStackTrace();
@@ -154,6 +154,39 @@ public class JavaSwingPrinter  extends JFrame {
 
         }//end of actionPerformed Method
     }//end of FileQuitAction Class
+
+    /**
+     * getPrintingDialog Method -
+     */
+    public static void getPrintingDialog() {
+        String message = "Printing will start within 10 seconds...";
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{});
+        JDialog dialog = optionPane.createDialog("Printing");
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.addComponentListener(new ComponentAdapter() {
+            @Override
+            // =====================
+            public void componentShown(ComponentEvent e) {
+                // =====================
+                super.componentShown(e);
+                Timer timer = new Timer(3000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dialog.setVisible(false);
+
+                    }//end of actionPerformed Method of Anonymous ActionListener
+                });
+                timer.setRepeats(false);
+                timer.start();
+            }
+        });
+
+        dialog.setVisible(true);
+        Object value = optionPane.getValue();
+        System.out.println(value);
+        dialog.dispose();
+
+    }//end of getPrintingDialog Method
 
     /**
      * main Method - contains the command line arguments
