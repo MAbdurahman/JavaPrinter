@@ -53,10 +53,10 @@ public class DisappearingMessage implements ActionListener {
 
     }//end of actionPerformed Method
 
-    // =====================
-// yes = 0, no = 1, cancel = 2
-// timer = uninitializedValue, [x] = null
-
+    /**
+     * getPrintingDialog Method - displays temporary message of printing status
+     * yes = 0, no = 1, cancel = 2, and timer = uninitializedValue, [x] = null
+     */
     public static void getPrintingDialog() {
         String message = "Printing will start within 10 seconds...";
         /*JOptionPane.showMessageDialog(null, message, "Printing", JOptionPane.PLAIN_MESSAGE);*/
@@ -88,9 +88,10 @@ public class DisappearingMessage implements ActionListener {
     }//end of getPrintingDialog Method
 
 public static void main (String[] args) {
-/*        DisappearingMessage dm = new DisappearingMessage("Test", 3);
-        dm.start();*/
-             getPrintingDialog();
+//        DisappearingMessage disappearMessage = new DisappearingMessage("Test", 3);
+//        disappearMessage.start();
+
+          getPrintingDialog();
 
     }//end of main Method
 }//end of DisappearingMessage Class

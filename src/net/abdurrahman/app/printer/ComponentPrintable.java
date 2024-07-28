@@ -8,7 +8,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterGraphics;
 
 public class ComponentPrintable implements Printable {
-    private Component component;
+    private final Component component;
     public ComponentPrintable(Component component) {
         this.component = component;
     }
@@ -51,10 +51,9 @@ public class ComponentPrintable implements Printable {
     }//end of print Method
 
     private boolean disableDoubleBuffering(Component component) {
-        if (component instanceof JComponent == false) {
+        if (!(component instanceof JComponent jComponent)) {
             return false;
         }
-        JComponent jComponent = (JComponent) component;
         boolean wasDoubleBuffering = jComponent.isDoubleBuffered();
         jComponent.setDoubleBuffered(false);
         return wasDoubleBuffering;
@@ -62,8 +61,7 @@ public class ComponentPrintable implements Printable {
     }//end of disableDoubleBuffering Method
 
     private void restoreDoubleBuffering(Component component, boolean wasBuffered) {
-        if (component instanceof JComponent) {
-            JComponent jComponent = (JComponent) component;
+        if (component instanceof JComponent jComponent) {
             jComponent.setDoubleBuffered(wasBuffered);
         }
 

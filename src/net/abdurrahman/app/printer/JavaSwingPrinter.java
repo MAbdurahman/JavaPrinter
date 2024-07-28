@@ -159,19 +159,27 @@ public class JavaSwingPrinter  extends JFrame {
      * getPrintingDialog Method -
      */
     public static void getPrintingDialog() {
-        String message = "Printing will start within 10 seconds...";
-        JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{});
+        String spaces_8 = "        ";
+        String message = spaces_8 +"Printing will start within 8 seconds. . .";
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE,
+                        JOptionPane.DEFAULT_OPTION, null, new Object[]{});
         JDialog dialog = optionPane.createDialog("Printing");
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.addComponentListener(new ComponentAdapter() {
+            /**
+             * componentShown Method -
+             * @param e the event to be processed
+             */
             @Override
-            // =====================
             public void componentShown(ComponentEvent e) {
-                // =====================
                 super.componentShown(e);
                 Timer timer = new Timer(3000, new ActionListener() {
+                    /**
+                     * actionPerformed Method -
+                     * @param ae the event to be processed
+                     */
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void actionPerformed(ActionEvent ae) {
                         dialog.setVisible(false);
 
                     }//end of actionPerformed Method of Anonymous ActionListener
