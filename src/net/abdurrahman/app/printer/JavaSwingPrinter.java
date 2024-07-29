@@ -94,8 +94,10 @@ public class JavaSwingPrinter  extends JFrame {
         @Override
         public void actionPerformed(ActionEvent ae) {
             PrinterJob printerJob = PrinterJob.getPrinterJob();
-            ComponentPrintable componentPrintable = new ComponentPrintable(getContentPane());
-            printerJob.setPrintable(componentPrintable, pageFormat);
+            /*ComponentPrintable componentPrintable = new ComponentPrintable(getContentPane());*/
+            PatchWorkComponent workComponent = new PatchWorkComponent("Captivated");
+            /*printerJob.setPrintable(componentPrintable, pageFormat);*/
+            printerJob.setPrintable(workComponent);
 
             if (printerJob.printDialog()) {
                 try {
