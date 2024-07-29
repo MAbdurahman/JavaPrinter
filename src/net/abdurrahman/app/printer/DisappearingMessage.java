@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Random;
 import javax.swing.*;
 
 public class DisappearingMessage implements ActionListener {
@@ -87,11 +88,26 @@ public class DisappearingMessage implements ActionListener {
 
     }//end of getPrintingDialog Method
 
+    public static String getPrintString() {
+        final String [] printStrings = {
+                "Sending to printer. . .",
+                "Printing will start within 8 seconds. . .",
+                "Preparing to print. . ."
+        };
+        Random random = new Random ();
+        int index = random.nextInt (printStrings.length);
+
+        return printStrings[index];
+
+    }//end of getPrintString Method
+
 public static void main (String[] args) {
 //        DisappearingMessage disappearMessage = new DisappearingMessage("Test", 3);
 //        disappearMessage.start();
 
-          getPrintingDialog();
+/*          getPrintingDialog();*/
+          String printString = getPrintString();
+          System.out.println(printString);
 
     }//end of main Method
 }//end of DisappearingMessage Class

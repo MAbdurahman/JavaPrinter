@@ -7,6 +7,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.Objects;
+import java.util.Random;
 
 public class JavaSwingPrinter  extends JFrame {
     //Instance variables
@@ -160,7 +161,7 @@ public class JavaSwingPrinter  extends JFrame {
      */
     public static void getPrintingDialog() {
         String spaces_8 = "        ";
-        String message = spaces_8 +"Printing will start within 8 seconds. . .";
+        String message = spaces_8 + getPrintString();
         JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE,
                         JOptionPane.DEFAULT_OPTION, null, new Object[]{});
         JDialog dialog = optionPane.createDialog("Printing");
@@ -195,6 +196,23 @@ public class JavaSwingPrinter  extends JFrame {
         dialog.dispose();
 
     }//end of getPrintingDialog Method
+
+    /**
+     * getPrintString Method - selects a random string from printStrings
+     * @return String - returns a random print string message
+     */
+    public static String getPrintString() {
+        final String [] printStrings = {
+                "Sending to printer. . .",
+                "Printing will start within 8 seconds. . .",
+                "Preparing to print. . ."
+        };
+        Random random = new Random ();
+        int index = random.nextInt (printStrings.length);
+
+        return printStrings[index];
+
+    }//end of getPrintString Method
 
     /**
      * main Method - contains the command line arguments
