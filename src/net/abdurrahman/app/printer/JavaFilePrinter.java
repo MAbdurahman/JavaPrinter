@@ -72,11 +72,6 @@ public class JavaFilePrinter extends JFrame {
         });//end of Anonymous WindowAdapter Class
     }//end of initComponents Method
 
-
-
-
-
-
     /**
      * centerFrame Method - centers the frame within the window
      */
@@ -144,6 +139,19 @@ public class JavaFilePrinter extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent ae) {
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            printerJob.setPrintable(filePageRenderer, pageFormat);
+
+            if (printerJob.printDialog()) {
+                try {
+                    printerJob.print();
+                    getPrintingDialog();
+
+                } catch (PrinterException ex) {
+                    String message = ex.getMessage() + "\n" + ex.getStackTrace();
+                    JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
         }//end of actionPerformed Method
     }//end of FilePrintAction Class
