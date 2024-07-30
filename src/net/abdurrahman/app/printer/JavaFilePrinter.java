@@ -159,6 +159,12 @@ public class JavaFilePrinter extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent ae) {
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            pageFormat = printerJob.pageDialog(pageFormat);
+            if (filePageRenderer != null) {
+                filePageRenderer.paginate(pageFormat);
+                showTitle();
+            }
 
         }//end of actionPerformed Method
     }//end of FilePageSetupAction Class
