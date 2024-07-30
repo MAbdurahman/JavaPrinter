@@ -43,7 +43,6 @@ public class JavaSwingPrinter  extends JFrame {
         //Add the menu bar
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File", true);
-        fileMenu.setMnemonic(KeyEvent.VK_F);
         fileMenu.add(new FilePrintAction(printIcon)).setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
         fileMenu.add(new FilePageSetupAction(pageSetupIcon)).setAccelerator(
