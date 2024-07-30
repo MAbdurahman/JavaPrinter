@@ -10,14 +10,14 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 
 public class PatchWorkComponent extends JComponent implements Printable {
-    private float side = 36;
-    private float offset = 36;
-    private int columns = 8;
-    private int rows = 4;
+    private final float side = 36;
+    private final float offset = 36;
+    private final int columns = 8;
+    private final int rows = 4;
     private String patchWorkString = "Captivated";
-    private Font patchWorkFont = new Font("Serif", Font.PLAIN, 64);
-    private Paint horizontalGradient;
-    private Paint verticalGradient;
+    private final Font patchWorkFont = new Font("Serif", Font.PLAIN, 64);
+    private final Paint horizontalGradient;
+    private final Paint verticalGradient;
 
     /**
      * PatchWorkComponent Constructor - default PatchWorkComponent
@@ -49,7 +49,7 @@ public class PatchWorkComponent extends JComponent implements Printable {
 
     /**
      * PatchWorkComponent-
-     * @param string
+     * @param string -
      */
     public PatchWorkComponent(String string) {
         this();
@@ -93,8 +93,8 @@ public class PatchWorkComponent extends JComponent implements Printable {
      * @param graphics   the context into which the page is drawn
      * @param pageFormat the size and orientation of the page being drawn
      * @param pageIndex  the zero based index of the page to be drawn
-     * @return
-     * @throws PrinterException
+     * @return Int - returns an int representing Printable.NO_SUCH_PAGE or Printable.PAGE_EXISTS
+     * @throws PrinterException - throws a PrinterException
      */
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
@@ -104,5 +104,6 @@ public class PatchWorkComponent extends JComponent implements Printable {
         paintComponent(graphics);
 
         return Printable.PAGE_EXISTS;
+
     }//end of print Method
 }//end of PatchWorkComponent Class
