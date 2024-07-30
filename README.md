@@ -10,5 +10,8 @@ JavaPrinter has a collection of Java Printer Examples range from basic printing 
 ##### `java-printer-dialog.gif`
 ![java-printer-dialog](https://github.com/user-attachments/assets/c1596def-5d06-4c00-b907-322cc2f5944e)
 
-#### `java-page-setup.gif`
+##### `java-page-setup.gif`
 ![java-page-setup](https://github.com/user-attachments/assets/404e9166-d77d-4dd8-b0d5-082f195eb95b)
+
+##### `java-file-printer.gif`
+![java-file-printer](https://github.com/user-attachments/assets/69efb8ce-1d38-4fe6-b53a-2135e6572e4a)

@@ -24,7 +24,7 @@ public class FilePageRenderer
 
     public FilePageRenderer(File file, PageFormat pageFormat)
             throws IOException {
-        mFontSize = 12;
+        mFontSize = 14;
         mFont = new Font("Serif", Font.PLAIN, mFontSize);
         // Open the file.
         BufferedReader in = new BufferedReader(
