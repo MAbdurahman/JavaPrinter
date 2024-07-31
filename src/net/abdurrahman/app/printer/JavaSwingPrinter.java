@@ -13,6 +13,7 @@ public class JavaSwingPrinter  extends JFrame {
     //Instance variables
     private PageFormat pageFormat;
 
+
     /**
      * Default Constructor -
      */
